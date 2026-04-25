@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fenestration CRM</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./src/styles.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://apis.google.com/js/api.js" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/idb@8/build/umd.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+  <div id="auth-screen" class="screen active">
+    <div class="auth-card card">
+      <h1>Fenestration CRM</h1>
+      <p>System Login</p>
+      <div id="g_id_onload" data-client_id="411330621380-otgtptg955t68im4hcrvrea81ihfe8c7.apps.googleusercontent.com"
+        data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin" data-type="standard"></div>
+    </div>
+  </div>
+
+  <div id="app-screen" class="screen">
+    <main id="main-content" class="content-area"></main>
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-target="dashboard">Dashboard</button>
+      <button class="nav-item" data-target="projects">Projects</button>
+      <button class="nav-item" data-target="rfq">RFQ</button>
+      <button class="nav-item" data-target="settings">Settings</button>
+    </nav>
+  </div>
+
+  <div id="mismatch-modal" class="modal-overlay hidden">
+    <div class="modal card">
+      <h2>Size Mismatch Detected</h2>
+      <p class="text-muted">Review BOQ changes against Master RFQ.</p>
+      <div id="mismatch-content"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="rejectMismatch()">Keep Master Size</button>
+        <button class="btn btn-primary" onclick="acceptMismatch()">Accept BOQ Size</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="consent-modal" class="modal-overlay hidden">
+    <div class="modal card">
+      <h2>Action Consent Required</h2>
+      <p id="consent-message" class="text-muted">Do you authorize sending an automated communication?</p>
+      <div class="modal-actions">
+        <button id="consent-deny" class="btn btn-secondary">Cancel</button>
+        <button id="consent-approve" class="btn btn-primary">Authorize</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./src/db.js"></script>
+  <script src="./src/api.js"></script>
+  <script src="./src/canvas.js"></script>
+  <script src="./src/app.js"></script>
+</body>
+
+</html>
